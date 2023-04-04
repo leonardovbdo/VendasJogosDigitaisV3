@@ -1,5 +1,7 @@
 package model;
 
+import java.text.DecimalFormat;
+import java.text.Format;
 import java.util.List;
 
 /**
@@ -15,6 +17,7 @@ public class JogoDigital {
     private int unidadesVendidas;
     private int avaliacoesPositivas;
     private List<JogoDigital> jogosDigitais;
+    private DecimalFormat df = new DecimalFormat("0.00");
 
     public JogoDigital(int id, String nome) {
         this.id = id;
@@ -101,7 +104,7 @@ public class JogoDigital {
         return "\nInformações do jogo "
                 + "\nid = " + id + ", "
                 + "\nnome = " + nome + ", "
-                + "\npreco = " + preco + ", "
+                + "\npreco = " + df.format(preco) + ", "
                 + "\npromocao = " + promocao + ", "
                 + "\nunidadesVendidas = " + unidadesVendidas + ", "
                 + "\navaliacoesPositivas = " + avaliacoesPositivas;

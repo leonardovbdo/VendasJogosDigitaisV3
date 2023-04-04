@@ -13,7 +13,6 @@ public class Main {
 
     public static Scanner entrada = new Scanner(System.in);
     public static ArrayList<JogoDigital> jogos;
-    public static final DecimalFormat df = new DecimalFormat("0.00");
 
     public static void main(String[] args) throws InterruptedException {
 
@@ -90,9 +89,7 @@ public class Main {
 
         gerarModelosAleatorios();
         
-        for (JogoDigital jogo: jogos){
-            System.out.println(jogo);
-        }
+        gerarLeituras();
 
     }
 }
