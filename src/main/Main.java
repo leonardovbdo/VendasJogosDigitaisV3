@@ -1,6 +1,5 @@
 package main;
 
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Scanner;
 import model.JogoDigital;
@@ -78,6 +77,23 @@ public class Main {
             );
         }
     }
+    
+    public static void ordenarLeituras(ArrayList<JogoDigital> jogos) throws InterruptedException {
+        
+        for (int i = 0; i < jogos.size(); i++) {
+            for (int j = i + 1; j < jogos.size(); j++) {
+                if (jogos.get(i).getPreco() < jogos.get(j).getPreco()) {
+                    JogoDigital temp = jogos.get(i);
+                    jogos.set(i, jogos.get(j));
+                    jogos.set(j, temp);
+                }
+            }
+        }
+        
+        for(JogoDigital jogo: jogos){
+            System.out.println(jogo);
+        }
+    }
 
     public static void menu() throws InterruptedException {
 
@@ -90,6 +106,8 @@ public class Main {
         gerarModelosAleatorios();
         
         gerarLeituras();
+        
+        ordenarLeituras(jogos);
 
     }
 }
