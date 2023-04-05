@@ -16,26 +16,26 @@ public class Main {
     public static void main(String[] args) throws InterruptedException {
 
         jogos = new ArrayList<JogoDigital>();
-        JogoDigital jogoDigital1 = new JogoDigital(1, "Terraria");
-        JogoDigital jogoDigital2 = new JogoDigital(2, "Dark Souls III");
-        JogoDigital jogoDigital3 = new JogoDigital(3, "Cuphead");
-        JogoDigital jogoDigital4 = new JogoDigital(4, "Grand Theft Auto V");
-        JogoDigital jogoDigital5 = new JogoDigital(5, "Resident Evil 2 Remake");
-        JogoDigital jogoDigital6 = new JogoDigital(6, "Dead Cells");
-        JogoDigital jogoDigital7 = new JogoDigital(7, "Fallout 4");
-        JogoDigital jogoDigital8 = new JogoDigital(8, "Hotline Miami");
-        JogoDigital jogoDigital9 = new JogoDigital(9, "Hollow Knight");
-        JogoDigital jogoDigital10 = new JogoDigital(10, "The Witcher 3: Wild Hunt");
-        JogoDigital jogoDigital11 = new JogoDigital(11, "Sunset Overdrive");
-        JogoDigital jogoDigital12 = new JogoDigital(12, "Subnautica");
-        JogoDigital jogoDigital13 = new JogoDigital(13, "Mortal Kombat X");
-        JogoDigital jogoDigital14 = new JogoDigital(14, "Pathologic 2");
-        JogoDigital jogoDigital15 = new JogoDigital(15, "Age of Mythology");
-        JogoDigital jogoDigital16 = new JogoDigital(16, "Plants vs. Zombies");
-        JogoDigital jogoDigital17 = new JogoDigital(17, "Sekiro: Shadows Die Twice");
-        JogoDigital jogoDigital18 = new JogoDigital(18, "Counter Strike: Global Offensive");
-        JogoDigital jogoDigital19 = new JogoDigital(19, "PlayerUnknown's Battlegrounds");
-        JogoDigital jogoDigital20 = new JogoDigital(20, "Elden Ring");
+        JogoDigital jogoDigital1 = new JogoDigital("Age of Mythology");
+        JogoDigital jogoDigital2 = new JogoDigital("Counter Strike: Global Offensive");
+        JogoDigital jogoDigital3 = new JogoDigital("Cuphead");
+        JogoDigital jogoDigital4 = new JogoDigital("Dark Souls III");
+        JogoDigital jogoDigital5 = new JogoDigital("Dead Cells");
+        JogoDigital jogoDigital6 = new JogoDigital("Elden Ring");
+        JogoDigital jogoDigital7 = new JogoDigital("Fallout 4");
+        JogoDigital jogoDigital8 = new JogoDigital("Grand Theft Auto V");
+        JogoDigital jogoDigital9 = new JogoDigital("Hollow Knight");
+        JogoDigital jogoDigital10 = new JogoDigital("Hotline Miami");
+        JogoDigital jogoDigital11 = new JogoDigital("Mortal Kombat X");
+        JogoDigital jogoDigital12 = new JogoDigital("Pathologic 2");
+        JogoDigital jogoDigital13 = new JogoDigital("Plants vs. Zombies");
+        JogoDigital jogoDigital14 = new JogoDigital("PlayerUnknown's Battlegrounds");
+        JogoDigital jogoDigital15 = new JogoDigital("Resident Evil 2 Remake");
+        JogoDigital jogoDigital16 = new JogoDigital("Sekiro: Shadows Die Twice");
+        JogoDigital jogoDigital17 = new JogoDigital("Subnautica");
+        JogoDigital jogoDigital18 = new JogoDigital("Sunset Overdrive");
+        JogoDigital jogoDigital19 = new JogoDigital("Terraria");
+        JogoDigital jogoDigital20 = new JogoDigital("The Witcher 3: Wild Hunt");
 
         jogos.add(jogoDigital1);
         jogos.add(jogoDigital2);
@@ -60,9 +60,9 @@ public class Main {
 
         menu();
     }
-    
+
     public static void gerarModelosAleatorios() {
-        for (int i = 0; i < jogos.size(); i++){
+        for (int i = 0; i < jogos.size(); i++) {
             jogos.get(i).setPrecoAleatorio();
             jogos.get(i).setPromocaoAleatoria();
             jogos.get(i).setUnidadesVendidasAleatoria();
@@ -77,20 +77,28 @@ public class Main {
             );
         }
     }
-    
+
+    public static void gerarJogosNomes() throws InterruptedException {
+        System.out.println("\n##### SEGUE ABAIXO A LISTA COM O NOME DOS JOGOS EM NOSSA LOJA #####\n");
+        for (JogoDigital jogo : jogos) {
+            System.out.println(jogo.getNome());
+        }
+    }
+
     public static void ordenarLeituras(ArrayList<JogoDigital> jogos) throws InterruptedException {
-        
+
         for (int i = 0; i < jogos.size(); i++) {
             for (int j = i + 1; j < jogos.size(); j++) {
-                if (jogos.get(i).getPreco() < jogos.get(j).getPreco()) {
+                if (jogos.get(i).getPreco() > jogos.get(j).getPreco()) {
                     JogoDigital temp = jogos.get(i);
                     jogos.set(i, jogos.get(j));
                     jogos.set(j, temp);
                 }
             }
+            jogos.get(i).setId(i + 1);
         }
-        
-        for(JogoDigital jogo: jogos){
+
+        for (JogoDigital jogo : jogos) {
             System.out.println(jogo);
         }
     }
@@ -100,14 +108,30 @@ public class Main {
         System.out.println("-----------------------------------------------------");
         System.out.println("----------------BEM-VINDO À NOSSA LOJA---------------");
         System.out.println("-----------------------------------------------------\n");
-        System.out.println("Tamanho da lista de jogos: " + jogos.size());
-        System.out.println("\nAbaixo virá uma sequencia de nomes aleatórios dos jogos dentro da loja...");
-
         gerarModelosAleatorios();
-        
-        gerarLeituras();
-        
-        ordenarLeituras(jogos);
 
+        char opcao;
+        boolean ligado = true;
+        do {
+            System.out.println("\n##### SELECIONE QUAL FUNÇÃO DESEJA REALIZAR #####");
+            System.out.println("\n[A] - IMPRIMIR A LISTA DE JOGOS");
+            System.out.println("[B] - IMPRIMIR A LISTA COM OS VALORES DOS JOGOS");
+            System.out.println("[C] - IMPRIMIR A LISTA DE JOGOS DE ORDENADA DE FORMA CRESCENTE");
+            opcao = entrada.nextLine().charAt(0);
+            char opcaoUpperCase = Character.toUpperCase(opcao);
+
+            switch (opcaoUpperCase) {
+                case 'A':
+                    gerarJogosNomes();
+                    break;
+                case 'B':
+                    gerarLeituras();
+                    break;
+                case 'C':
+                    ordenarLeituras(jogos);
+                    break;
+            }
+
+        } while (ligado);
     }
 }

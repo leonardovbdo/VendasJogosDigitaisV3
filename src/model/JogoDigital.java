@@ -19,8 +19,8 @@ public class JogoDigital {
     private List<JogoDigital> jogosDigitais;
     private DecimalFormat df = new DecimalFormat("0.00");
 
-    public JogoDigital(int id, String nome) {
-        this.id = id;
+    public JogoDigital(String nome) {
+        this.id = 0;
         this.nome = nome;
         this.preco = 0;
         this.promocao = false;
