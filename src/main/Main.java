@@ -145,7 +145,7 @@ public class Main {
     * afinal cada loop utiliza a quantidade de jogos presente na lista, sendo esse o valor de n.
     */
 
-    public static void encontrarMaiorDiferenca(ArrayList<JogoDigital> jogos) {
+    public static void encontrarMaiorDiferencaAvaliacao(ArrayList<JogoDigital> jogos) {
         int n = jogos.size(); //declara a variável que segue o tamanho da lista
         double maiorDiferenca = 0; // essa variável será usada para armazenar a maior diferença entre as porcentagens
         int indexJogoMaiorPorcentagem = 0; // declara como variável o jogo com maior porcentagem
@@ -284,7 +284,7 @@ public class Main {
                     ordenarLeituras(jogos);
                     break;
                 case 'D':
-                    encontrarMaiorDiferenca(jogos);
+                    encontrarMaiorDiferencaAvaliacao(jogos);
                     break;
                 case 'E':
                     ligado = false;
