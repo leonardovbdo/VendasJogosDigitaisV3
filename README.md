@@ -4,7 +4,7 @@ Para instalar a aplicação, siga os seguintes passos:
 1. Clone o repositório:
 
 ```bash
-git clone https://github.com/alissonfr/monitoramento_energia.git](https://github.com/leonardovbdo/VendasJogosDigitais.git
+git clone https://github.com/leonardovbdo/VendasJogosDigitais.git
 ```
 
 2. Abra a pasta do projeto como um projeto em qualquer IDE que rode java
