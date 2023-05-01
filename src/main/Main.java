@@ -19,7 +19,7 @@ public class Main {
     * partir da classe JogoDigital e dessa lista iremos realizar as funções que utilizarão
     * dos objetos e seus atributos
     *
-    */
+     */
     public static Scanner entrada = new Scanner(System.in);
     public static ArrayList<JogoDigital> jogos;
 
@@ -31,7 +31,7 @@ public class Main {
     * Ao final da inserção dos objetos dentro da lista o método termina iniciando o outro método chamado
     * menu(), o qual irá realizar as operações dos métodos estáticos abaixo. Posteriormente o método menu()
     * será detalhado
-    */
+     */
     public static void main(String[] args) throws InterruptedException {
 
         jogos = new ArrayList<JogoDigital>();
@@ -79,7 +79,7 @@ public class Main {
 
         menu();
     }
-    
+
     /*
     * O primeiro método estático operacional que encontramos também é o primeiro método
     * que será iniciado no momento em que o código é iniciado, independente do controle do usuário.
@@ -88,8 +88,7 @@ public class Main {
     * JogoDigital. Esses métodos tem como função aplicar valores aleatórios, seguindo as regras
     * estabelecidas pelo desesnvolvedor, em cada um dos atributos dos objetos da classe JogoDigital,
     * excluindo apenas os atributos nome e id.
-    */
-
+     */
     public static void gerarModelosAleatorios() {
         for (int i = 0; i < jogos.size(); i++) {
             jogos.get(i).setPrecoAleatorio();
@@ -98,14 +97,13 @@ public class Main {
             jogos.get(i).setAvaliacoesPositivasAleatoria();
         }
     }
-    
+
     /*
     * Este método estático será chamado a partir do método menu() quando o usuário selecioná-lo.
     * Sua função é simples, ele irá percorrer todos os objetos do ArrayList mencionado anteriormente 
     * e irá realizar o método toString() que é responstável por imprimir os atributos de cada um dos jogos
     * percorridos, detalhando-os e deixando claro qual é qual.
-    */
-
+     */
     public static void gerarLeituras() throws InterruptedException {
         for (int i = 0; i < 20; i++) {
             System.out.println(
@@ -113,20 +111,19 @@ public class Main {
             );
         }
     }
-    
+
     /*
     Este método funciona semelhante como o método anterior, porém ao invés de imprimir todos os atributos
     de cada um dos jogos como o método toString(), ele irá apenas imprimir o nome de cada um dos jogos do ArrayList
     utilizando o método getNome()
-    */
-
+     */
     public static void gerarJogosNomes() throws InterruptedException {
         System.out.println("\n##### SEGUE ABAIXO A LISTA COM O NOME DOS JOGOS EM NOSSA LOJA #####\n");
         for (JogoDigital jogo : jogos) {
             System.out.println(jogo.getNome());
         }
     }
-    
+
     /*
     * Este método tem como objetivo realizar o algoritmo de maior complexidade presente dentro deste sistema.
     * A sua função é percorrer o ArrayList de JogoDigital calculando a porcentagem de avaliações positivas de
@@ -143,8 +140,7 @@ public class Main {
     * as variáveis novamente, caso a verificação retorne como verdadeira. A complexidade do algoritmo presente neste método
     * estático é de O(n^3), já que a presença dos três loops aninhados para realizar essas buscas e comparações implica neste fato,
     * afinal cada loop utiliza a quantidade de jogos presente na lista, sendo esse o valor de n.
-    */
-
+     */
     public static void encontrarMaiorDiferencaAvaliacao(ArrayList<JogoDigital> jogos) {
         int n = jogos.size(); //declara a variável que segue o tamanho da lista
         double maiorDiferenca = 0; // essa variável será usada para armazenar a maior diferença entre as porcentagens
@@ -153,41 +149,41 @@ public class Main {
         /*
         * essa variável abaixo se inicia com valor máximo pois será utilizada na verificação de se a 
         * porcentagem é menor que a variável presente até então
-        */
-        double menorPorcentagem = Double.MAX_VALUE; 
+         */
+        double menorPorcentagem = Double.MAX_VALUE;
 
         /*
         * O conjunto de loops irão percorrer sobre todos os possíveis trios de jogos presentes na lista.
         * O primeiro loop itera sobre o primeiro jogo, o seguinte itera o segundo e o último intera sobre o terceiro.
-        */
+         */
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
                 for (int k = 0; k < n; k++) {
                     /*
                     * verificação se os jogos iterados são diferentes uns dos outros
-                    */
+                     */
                     if (i != j && i != k && j != k) {
                         /*
                         * são calculadas as porcentagens de cada um dos 3 jogos
-                        */
+                         */
                         double porcentagemI = 100 * ((double) jogos.get(i).getAvaliacoesPositivas() / jogos.get(i).getUnidadesVendidas());
                         double porcentagemJ = 100 * ((double) jogos.get(j).getAvaliacoesPositivas() / jogos.get(j).getUnidadesVendidas());
                         double porcentagemK = 100 * ((double) jogos.get(k).getAvaliacoesPositivas() / jogos.get(k).getUnidadesVendidas());
                         /*
                         * são calculadas as diferenças das porcentagens de cada um dos 3 jogos
-                        */
+                         */
                         double diferencaIJ = Math.abs(porcentagemI - porcentagemJ);
                         double diferencaIK = Math.abs(porcentagemI - porcentagemK);
                         double diferencaJK = Math.abs(porcentagemJ - porcentagemK);
                         /*
                         * A maior diferença entre as três diferenças é dada pela variável abaixo maiorDif
-                        */
+                         */
                         double maiorDif = Math.max(diferencaIJ, Math.max(diferencaIK, diferencaJK));
                         /*
                         * Se a maior diferença encontrada for maior que a maior diferença encontrada até então
                         * a variável maiorDiferenca será atualizada pelo valor da variável maiorDif. Em seguida, a variável
                         * indexJogoMaiorPorcentagem é atualizada com o índice do jogo que possuiu a maior diferença dentro do calculo
-                        */
+                         */
                         if (maiorDif > maiorDiferenca) {
                             maiorDiferenca = maiorDif;
                             indexJogoMaiorPorcentagem = porcentagemI > porcentagemJ ? i : j;
@@ -198,7 +194,7 @@ public class Main {
                         * e se a menor porcentagem atual encontrada for menor que a porcentagem armazenada até então, na variável menorPorcentagem
                         * a variável menorPorcentagem é atualizada para o valor da menor porcentagem encotnrada (menorDif) e o valor de indexJogoMenorPorcentagem
                         * também é atualizada com o índice do jogo que possuiu essa menor porcentagem
-                        */
+                         */
                         double menorDif = Math.min(porcentagemI, Math.min(porcentagemJ, porcentagemK));
                         if (menorDif < menorPorcentagem) {
                             menorPorcentagem = menorDif;
@@ -213,7 +209,7 @@ public class Main {
         /*
         * Por fim são impressos os valores do jogo com maior porcentagem, de menor porcentagem e diferença 
         * do valor das porcentagens de avaliações positivas entre entre eles
-        */
+         */
         System.out.println("Jogo com maior porcentagem de avaliações positivas: " + jogos.get(indexJogoMaiorPorcentagem).getNome());
         System.out.println("Jogo com menor porcentagem de avaliações positivas: " + jogos.get(indexJogoMenorPorcentagem).getNome());
         System.out.println("Maior diferença entre as porcentagens de avaliações positivas dos jogos: " + maiorDiferenca);
@@ -227,8 +223,7 @@ public class Main {
     * jogo será armazenado  em uma variável chamada temp. O valor do primeiro jogo passará a ser o valor do segundo, 
     * ocupando seu lugar na lista e o valor do segundo jogo iterado receberá o valor da variável que armazenou o valor do primeiro jogo
     * ocupando o lugar do segundo jogo e consequentemente, descendo de posição na lista. 
-    */
-    
+     */
     public static void ordenarLeituras(ArrayList<JogoDigital> jogos) throws InterruptedException {
 
         for (int i = 0; i < jogos.size(); i++) {
@@ -246,18 +241,17 @@ public class Main {
             System.out.println(jogo);
         }
     }
-    
+
     /*
     * Este método estático tem como função imprimir os visuais que serão usados pelo usuário, representando o front-end
     * Logo em seu início esse método irá realizar o método gerarModelosAleatórios() que realizará a função detalhada anteriormente.
     * O método terá variáveis de char para a funcionalidade das opções requisitadas pelo usuário sob função de um switch case simples
     * e uma variável booleana de ligado que irá definir o funcionamento do sistema se está "ligado" ou "desligado" em função de um do while simples
-    */
-
+     */
     public static void menu() throws InterruptedException {
 
         System.out.println("-----------------------------------------------------");
-        System.out.println("----------------BEM-VINDO À NOSSA LOJA---------------");
+        System.out.println("----------------BEM-VINDO-À-NOSSA-LOJA---------------");
         System.out.println("-----------------------------------------------------\n");
         gerarModelosAleatorios();
 
