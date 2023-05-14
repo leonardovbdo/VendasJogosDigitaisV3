@@ -84,6 +84,15 @@ public class JogoDigital {
         this.avaliacoesPositivas = avaliacoesPositivas;
     }
 
+    /*
+    * Método que verifica se o objeto da classe JogoDigital possui um valor
+    * de preço atual diferente de 0, para assim definir o preço antigo com o valor do preço atual.
+    * Depois o valor do preço atual muda para algum número aleatório de 0 a 300.
+    * Se a verificação mencionada anteriormente for falsa, o valor de precoAtual é diretamente definido
+    * aleatóriamente de um número entre 0 a 300.
+    * A complexidade do método é 0(1), pois não importa o quão grande seja o conjunto de dados, o tempo
+    * permanecerá constante.
+    */
     public void setPrecoAleatorio() {
         if (this.precoAtual != 0) {
             this.precoAntigo = this.precoAtual;
@@ -91,6 +100,11 @@ public class JogoDigital {
         this.precoAtual = (double) (Math.random() * 300);
     }
 
+    /* método que define um número inteiro aleatório de 0 a 1 para definir
+    * se o atributo promocao do objeto jogo será verdadeiro ou falso
+    * combase na lógica binária.
+    * Complexidade de O(1).
+    */
     public void setPromocaoAleatoria() {
         int resultado;
         resultado = (int) (Math.random() * 2);
@@ -102,14 +116,32 @@ public class JogoDigital {
         }
     }
 
+    /*
+    * Método que define o atributo unidadesVendidas com base em um número inteiro aleatório de
+    * 0 a 100000.
+    * Complexidade O(1).
+    * */
     public void setUnidadesVendidasAleatoria() {
         this.unidadesVendidas = (int) (Math.random() * 100000);
     }
 
+    /*
+    * Método que define o atributo avaliacoesPositivas com base em um número inteiro aleatório
+    * entre 0 e o número do atributo unidadesVendidas.
+    * Complexidade O(1).
+    * */
     public void setAvaliacoesPositivasAleatoria() {
         this.avaliacoesPositivas = (int) (Math.random() * this.unidadesVendidas);
     }
 
+    /*
+    * Método de que define uma variável diminuicaoPercentual com base no calculo da diferença
+    * entre precoAntigo e precoAtual do objeto dividido pelo valor do precoAntigo e depois multiplicado
+    * por 100 para entregar um valor que representa a porcentagem da diferença entre o precoAtual e o
+    * precoAntigo. Depois disso é verificado se a variável diminuicaoPercentual é maior que 50
+    * Se sim o método retornará true.
+    * Complexidade O(1).
+    * */
     public boolean recebeuDiminuicaoSignificativa() {
         double diminuicaoPercentual = ((this.precoAntigo - this.precoAtual) / this.precoAntigo) * 100;
         return diminuicaoPercentual > 50.0;

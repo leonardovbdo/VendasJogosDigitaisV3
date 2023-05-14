@@ -18,6 +18,12 @@ public class AtualizarPrecoJogo extends Thread {
         this.ligado = true;
     }
 
+    /*
+    * Método run da thread que será responsável para utilizar os métodos que definem
+    * valores aleatórios para os atributos dos objetos com base nas regras definidas
+    * na classe JogoDigital. Pelo fato de todos os métodos executados terem complexidade
+    * O(1), o método run também terá complexidade O(1).
+    * */
     @Override
     public void run() {
         while (ligado) {
