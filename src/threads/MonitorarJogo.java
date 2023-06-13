@@ -28,7 +28,7 @@ public class MonitorarJogo extends Thread {
                 double menorDiferenca = Double.MAX_VALUE;
 
                 for (int i = 0; i < n; i++) {
-                    for (int j = +1; j < n; j++) {
+                    for (int j = i+1; j < n; j++) {
 
                         double porcentagemI = jogos.get(i).getPorcentagemAvaliacoesPositivas();
                         double porcentagemJ = jogos.get(j).getPorcentagemAvaliacoesPositivas();
