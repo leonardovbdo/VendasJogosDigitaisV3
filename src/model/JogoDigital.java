@@ -134,6 +134,10 @@ public class JogoDigital {
         this.avaliacoesPositivas = (int) (Math.random() * this.unidadesVendidas);
     }
 
+    public double getPorcentagemAvaliacoesPositivas() {
+        return 100 * ((double) this.getAvaliacoesPositivas() / this.getUnidadesVendidas());
+    }
+
     /*
     * Método de que define uma variável diminuicaoPercentual com base no calculo da diferença
     * entre precoAntigo e precoAtual do objeto dividido pelo valor do precoAntigo e depois multiplicado

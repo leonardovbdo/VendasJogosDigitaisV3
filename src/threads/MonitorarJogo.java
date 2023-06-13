@@ -2,12 +2,15 @@ package threads;
 
 import model.JogoDigital;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class MonitorarJogo extends Thread {
 
     private final ArrayList<JogoDigital> jogos;
-    private boolean ligado;
+    private final boolean ligado;
+
+    private final DecimalFormat df = new DecimalFormat("0.00");
 
     public MonitorarJogo(ArrayList<JogoDigital> jogos) {
         this.jogos = jogos;
@@ -23,7 +26,7 @@ public class MonitorarJogo extends Thread {
                 double maiorDiferenca = 0;
                 int indexJogoMaiorPorcentagem = 0;
                 int indexJogoMenorPorcentagem = 0;
-                double menorPorcentagem = Double.MAX_VALUE;
+                double menorDiferenca = Double.MAX_VALUE;
 
                 for (int i = 0; i < n; i++) {
                     for (int j = 0; j < n; j++) {
@@ -48,8 +51,8 @@ public class MonitorarJogo extends Thread {
                                 }
 
                                 double menorDif = Math.min(porcentagemI, Math.min(porcentagemJ, porcentagemK));
-                                if (menorDif < menorPorcentagem) {
-                                    menorPorcentagem = menorDif;
+                                if (menorDif < menorDiferenca) {
+                                    menorDiferenca = menorDif;
                                     indexJogoMenorPorcentagem = porcentagemI < porcentagemJ ? i : j;
                                     indexJogoMenorPorcentagem = porcentagemK < porcentagemI && porcentagemK < porcentagemJ ? k : indexJogoMenorPorcentagem;
                                 }
@@ -58,9 +61,9 @@ public class MonitorarJogo extends Thread {
                     }
                 }
 
-                System.out.println("Jogo com maior porcentagem de avaliações positivas: " + jogos.get(indexJogoMaiorPorcentagem).getNome());
-                System.out.println("Jogo com menor porcentagem de avaliações positivas: " + jogos.get(indexJogoMenorPorcentagem).getNome());
-                System.out.println("Maior diferença entre as porcentagens de avaliações positivas dos jogos: " + maiorDiferenca);
+                System.out.println("Jogo com maior porcentagem de avaliações positivas: " + jogos.get(indexJogoMaiorPorcentagem).getNome() + " porcentagem: " + df.format(jogos.get(indexJogoMaiorPorcentagem).getPorcentagemAvaliacoesPositivas()) + "%");
+                System.out.println("Jogo com menor porcentagem de avaliações positivas: " + jogos.get(indexJogoMenorPorcentagem).getNome() + " porcentagem: " + df.format(jogos.get(indexJogoMenorPorcentagem).getPorcentagemAvaliacoesPositivas()) + "%");
+                System.out.println("Maior diferença entre as porcentagens de avaliações positivas dos jogos: " + df.format(maiorDiferenca));
                 Thread.sleep(10000);
             } catch (InterruptedException e) {
 

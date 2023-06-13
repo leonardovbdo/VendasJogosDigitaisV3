@@ -89,7 +89,7 @@ public class Main {
         double maiorDiferenca = 0;
         int indexJogoMaiorPorcentagem = 0;
         int indexJogoMenorPorcentagem = 0;
-        double menorPorcentagem = Double.MAX_VALUE;
+        double menorDiferenca = Double.MAX_VALUE;
 
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
@@ -114,8 +114,8 @@ public class Main {
                         }
 
                         double menorDif = Math.min(porcentagemI, Math.min(porcentagemJ, porcentagemK));
-                        if (menorDif < menorPorcentagem) {
-                            menorPorcentagem = menorDif;
+                        if (menorDif < menorDiferenca) {
+                            menorDiferenca = menorDif;
                             indexJogoMenorPorcentagem = porcentagemI < porcentagemJ ? i : j;
                             indexJogoMenorPorcentagem = porcentagemK < porcentagemI && porcentagemK < porcentagemJ ? k : indexJogoMenorPorcentagem;
                         }
@@ -126,7 +126,7 @@ public class Main {
 
         System.out.println("Jogo com maior porcentagem de avaliações positivas: " + jogos.get(indexJogoMaiorPorcentagem).getNome());
         System.out.println("Jogo com menor porcentagem de avaliações positivas: " + jogos.get(indexJogoMenorPorcentagem).getNome());
-        System.out.println("Maior diferença entre as porcentagens de avaliações positivas dos jogos: " + maiorDiferenca);
+        System.out.println("Maior diferença entre as porcentagens de avaliações positivas dos jogos: " + df.format(maiorDiferenca));
     }
 
     /*
