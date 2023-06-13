@@ -3,6 +3,7 @@ package main;
 import model.JogoDigital;
 import model.Nomes;
 import threads.AtualizarPrecoJogo;
+import threads.MonitorarJogo;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -17,6 +18,7 @@ public class Main {
     public static ArrayList<JogoDigital> jogos = new ArrayList<>();
     public static ArrayList<AtualizarPrecoJogo> threads = new ArrayList<>();
     public static DecimalFormat df = new DecimalFormat("0.00");
+    public static MonitorarJogo monitorarJogo = new MonitorarJogo(jogos);
 
     public static void main(String[] args) throws InterruptedException {
 
@@ -218,7 +220,8 @@ public class Main {
                     encontrarMaiorDiferencaAvaliacao(jogos);
                     break;
                 case 'P':
-                    monitorarPrecosPrincipal();
+                    //monitorarPrecosPrincipal();
+                    monitorarJogo.run();
                     break;
                 case 'S':
                     System.out.println("\nAguarde, o sistema está sendo desligado...");
