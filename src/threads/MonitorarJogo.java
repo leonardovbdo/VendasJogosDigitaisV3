@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class MonitorarJogo extends Thread {
 
     private final ArrayList<JogoDigital> jogos;
-    private final boolean ligado;
+    private boolean ligado;
 
     private final DecimalFormat df = new DecimalFormat("0.00");
 
@@ -20,7 +20,6 @@ public class MonitorarJogo extends Thread {
     @Override
     public void run() {
         while (ligado) {
-
             try {
                 int n = jogos.size();
                 double maiorDiferenca = 0;
@@ -29,34 +28,22 @@ public class MonitorarJogo extends Thread {
                 double menorDiferenca = Double.MAX_VALUE;
 
                 for (int i = 0; i < n; i++) {
-                    for (int j = 0; j < n; j++) {
-                        for (int k = 0; k < n; k++) {
+                    for (int j = +1; j < n; j++) {
 
-                            if (i != j && i != k && j != k) {
+                        double porcentagemI = jogos.get(i).getPorcentagemAvaliacoesPositivas();
+                        double porcentagemJ = jogos.get(j).getPorcentagemAvaliacoesPositivas();
 
-                                double porcentagemI = 100 * ((double) jogos.get(i).getAvaliacoesPositivas() / jogos.get(i).getUnidadesVendidas());
-                                double porcentagemJ = 100 * ((double) jogos.get(j).getAvaliacoesPositivas() / jogos.get(j).getUnidadesVendidas());
-                                double porcentagemK = 100 * ((double) jogos.get(k).getAvaliacoesPositivas() / jogos.get(k).getUnidadesVendidas());
+                        double maiorDif = Math.abs(porcentagemI - porcentagemJ);
+                        double menorDif = Math.min(porcentagemI, porcentagemJ);
 
-                                double diferencaIJ = Math.abs(porcentagemI - porcentagemJ);
-                                double diferencaIK = Math.abs(porcentagemI - porcentagemK);
-                                double diferencaJK = Math.abs(porcentagemJ - porcentagemK);
+                        if (maiorDif > maiorDiferenca) {
+                            maiorDiferenca = maiorDif;
+                            indexJogoMaiorPorcentagem = porcentagemI > porcentagemJ ? i : j;
+                        }
 
-                                double maiorDif = Math.max(diferencaIJ, Math.max(diferencaIK, diferencaJK));
-
-                                if (maiorDif > maiorDiferenca) {
-                                    maiorDiferenca = maiorDif;
-                                    indexJogoMaiorPorcentagem = porcentagemI > porcentagemJ ? i : j;
-                                    indexJogoMaiorPorcentagem = porcentagemK > porcentagemI && porcentagemK > porcentagemJ ? k : indexJogoMaiorPorcentagem;
-                                }
-
-                                double menorDif = Math.min(porcentagemI, Math.min(porcentagemJ, porcentagemK));
-                                if (menorDif < menorDiferenca) {
-                                    menorDiferenca = menorDif;
-                                    indexJogoMenorPorcentagem = porcentagemI < porcentagemJ ? i : j;
-                                    indexJogoMenorPorcentagem = porcentagemK < porcentagemI && porcentagemK < porcentagemJ ? k : indexJogoMenorPorcentagem;
-                                }
-                            }
+                        if (menorDif < menorDiferenca) {
+                            menorDiferenca = menorDif;
+                            indexJogoMenorPorcentagem = porcentagemI < porcentagemJ ? i : j;
                         }
                     }
                 }
@@ -68,7 +55,10 @@ public class MonitorarJogo extends Thread {
             } catch (InterruptedException e) {
 
             }
-
         }
+    }
+
+    public void desligar() {
+        this.ligado = false;
     }
 }
