@@ -205,7 +205,7 @@ public class Main {
             System.out.println("[B] - IMPRIMIR A LISTA COM OS VALORES DOS JOGOS");
             System.out.println("[C] - IMPRIMIR A LISTA DE JOGOS DE ORDENADA DE FORMA CRESCENTE");
             System.out.println("[D] - CALCULAR A MAIOR DIFERÊNÇA ENTRE PORCENTAGENS DE AVALIAÇÕES POSITIVAS");
-            System.out.println("[P] - EXIBIR MONITORAMENTO PELO PROGRAMA PRINCIPAL");
+            System.out.println("[T] - EXIBIR MONITORAMENTO PELA THREAD");
             System.out.println("[S] - SAIR");
             System.out.print("Sua escolha: ");
             opcao = entrada.nextLine().charAt(0);
@@ -224,7 +224,7 @@ public class Main {
                 case 'D':
                     encontrarMaiorDiferencaAvaliacao(jogos);
                     break;
-                case 'P':
+                case 'T':
                     iniciarMonitorarThread();
                     ligado = false;
                     break;
@@ -249,5 +249,6 @@ public class Main {
         for (AtualizarPrecoJogo thread : threads) {
             thread.desligar();
         }
+        monitorarJogo.desligar();
     }
 }

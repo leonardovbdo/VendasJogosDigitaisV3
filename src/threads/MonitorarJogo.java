@@ -69,4 +69,8 @@ public class MonitorarJogo extends Thread {
     public void pararMonitorar() {
         this.monitorando = false;
     }
+
+    public void desligar() {
+        this.ligado = false;
+    }
 }
