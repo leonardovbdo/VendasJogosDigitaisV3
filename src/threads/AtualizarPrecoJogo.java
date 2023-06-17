@@ -1,13 +1,21 @@
 package threads;
 
 import model.JogoDigital;
+import utils.Encriptador;
+
+import javax.crypto.spec.SecretKeySpec;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 
 /**
  *
  * @author Leonardo
  */
 public class AtualizarPrecoJogo extends Thread {
+
+    private SecretKeySpec secretKeySpec;
+    private String dadosEncrpitados;
+    private Encriptador encriptador = new Encriptador();
 
     private final JogoDigital jogo;
     private boolean ligado;
@@ -32,11 +40,27 @@ public class AtualizarPrecoJogo extends Thread {
                 jogo.setPromocaoAleatoria();
                 jogo.setUnidadesVendidasAleatoria();
                 jogo.setAvaliacoesPositivasAleatoria();
-                Thread.sleep(10000); // Espera 10 segundos
-            } catch (InterruptedException ignored) {
+                String dados = jogo.toString();
 
+                this.dadosEncrpitados = encriptador.encriptar(dados, getSecretKeySpec());
+
+                Thread.sleep(10000); // Espera 10 segundos
+            } catch (Exception e) {
+                throw new RuntimeException(e);
             }
         }
+    }
+
+    public SecretKeySpec getSecretKeySpec() {
+        return secretKeySpec;
+    }
+
+    public void setSecretKeySpec(SecretKeySpec secretKeySpec) {
+        this.secretKeySpec = secretKeySpec;
+    }
+
+    public String toStringEncriptado() {
+        return this.dadosEncrpitados;
     }
 
     public JogoDigital getJogo() {

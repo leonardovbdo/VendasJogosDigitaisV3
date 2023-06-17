@@ -4,9 +4,14 @@ import model.JogoDigital;
 import model.Nomes;
 import threads.AtualizarPrecoJogo;
 import threads.MonitorarJogo;
+import utils.AudioDataExtractor;
+import utils.Encriptador;
+import utils.GeradorChaves;
 
+import javax.crypto.spec.SecretKeySpec;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -20,14 +25,27 @@ public class Main {
     public static DecimalFormat df = new DecimalFormat("0.00");
     public static MonitorarJogo monitorarJogo = new MonitorarJogo(jogos);
 
-    public static void main(String[] args) throws InterruptedException {
+    public static AudioDataExtractor extractor = new AudioDataExtractor();
+    public static GeradorChaves geradorChaves = new GeradorChaves();
+    public static Encriptador encriptador = new Encriptador();
+
+    public static void main(String[] args) throws Exception {
 
         for (int i = 0; i < 20; i++) {
             JogoDigital jogo = new JogoDigital(Nomes.getNomeById(i));
             jogos.add(jogo);
             AtualizarPrecoJogo atualizarPrecoJogo = new AtualizarPrecoJogo(jogo);
-            threads.add(atualizarPrecoJogo);
+
+
+            extractor.extractAudioBytes("C:\\Users\\odran\\OneDrive\\Área de Trabalho\\prova\\VendasJogosDigitais\\src\\assets\\bebe_chorando.wav");
+            ArrayList<byte[]> audioBytes = extractor.getAudioBytes();
+
             atualizarPrecoJogo.start();
+
+            SecretKeySpec secretKeySpec = geradorChaves.generateKeys(audioBytes);
+            atualizarPrecoJogo.setSecretKeySpec(secretKeySpec);
+            threads.add(atualizarPrecoJogo);
+
         }
         monitorarJogo.start();
 
@@ -171,7 +189,7 @@ public class Main {
     * o método percorre todos os jogos da lista de uma vez, realizando uma verificação simples para cada
     * jogo.
     *  */
-    public static void iniciarMonitorarThread() throws InterruptedException{
+    public static void iniciarMonitorarThread() throws Exception {
         char saida;
         monitorarJogo.monitorar();
         System.out.println("\nDigite S para parar de monitorar");
@@ -190,12 +208,26 @@ public class Main {
         menu();
     }
 
+    public static void listarCriptografias() throws Exception {
+
+        for (AtualizarPrecoJogo atualizarPrecoJogo : threads) {
+            System.out.println(atualizarPrecoJogo.toStringEncriptado());
+        }
+
+        System.out.println();
+
+        for (AtualizarPrecoJogo atualizarPrecoJogos : threads) {
+            System.out.println(Encriptador.decrypt(atualizarPrecoJogos.toStringEncriptado(),atualizarPrecoJogos.getSecretKeySpec()));
+        }
+
+    }
+
     /*
     * Método menu que é reponsável por exibir um menu de opções para o usuário realizar diferentes
     * ações com base na escolha. A complexidade deste método vai depender da complexidade das ações
     * realizadas em cada caso no bloco switch.
     * */
-    public static void menu() throws InterruptedException {
+    public static void menu() throws Exception {
 
         char opcao;
         boolean ligado = true;
@@ -227,6 +259,9 @@ public class Main {
                 case 'T':
                     iniciarMonitorarThread();
                     ligado = false;
+                    break;
+                case 'L' :
+                    listarCriptografias();
                     break;
                 case 'S':
                     System.out.println("\nAguarde, o sistema está sendo desligado...");
