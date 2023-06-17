@@ -35,12 +35,18 @@ public class Main {
             AtualizarPrecoJogo atualizarPrecoJogo = new AtualizarPrecoJogo(jogo);
 
 
+            // método que irá extrair os bytes do arquivo de aúdio através do seu caminho
             extractor.extractBytes("C:\\Users\\odran\\OneDrive\\Área de Trabalho\\prova\\VendasJogosDigitais\\src\\assets\\bebe_chorando.wav");
+
+            // ArrayList de bytes que receberá os bytes extraidos
             ArrayList<byte[]> audioBytes = extractor.getAudioBytes();
 
             atualizarPrecoJogo.start();
 
+            // Chaves são geradas a partir do ArrayList de bytes extraídos do áudio
             SecretKeySpec secretKeySpec = geradorChaves.gerarChaves(audioBytes);
+
+            // thread recebe a chave criada que será usada para criptografar e/ou desemcriptografar
             atualizarPrecoJogo.setSecretKeySpec(secretKeySpec);
             threads.add(atualizarPrecoJogo);
 
