@@ -4,14 +4,13 @@ import model.JogoDigital;
 import model.Nomes;
 import threads.AtualizarPrecoJogo;
 import threads.MonitorarJogo;
-import utils.AudioDataExtractor;
+import utils.ExtratorAudio;
 import utils.Encriptador;
 import utils.GeradorChaves;
 
 import javax.crypto.spec.SecretKeySpec;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -25,9 +24,8 @@ public class Main {
     public static DecimalFormat df = new DecimalFormat("0.00");
     public static MonitorarJogo monitorarJogo = new MonitorarJogo(jogos);
 
-    public static AudioDataExtractor extractor = new AudioDataExtractor();
+    public static ExtratorAudio extractor = new ExtratorAudio();
     public static GeradorChaves geradorChaves = new GeradorChaves();
-    public static Encriptador encriptador = new Encriptador();
 
     public static void main(String[] args) throws Exception {
 
@@ -37,12 +35,12 @@ public class Main {
             AtualizarPrecoJogo atualizarPrecoJogo = new AtualizarPrecoJogo(jogo);
 
 
-            extractor.extractAudioBytes("C:\\Users\\odran\\OneDrive\\Área de Trabalho\\prova\\VendasJogosDigitais\\src\\assets\\bebe_chorando.wav");
+            extractor.extractBytes("C:\\Users\\odran\\OneDrive\\Área de Trabalho\\prova\\VendasJogosDigitais\\src\\assets\\bebe_chorando.wav");
             ArrayList<byte[]> audioBytes = extractor.getAudioBytes();
 
             atualizarPrecoJogo.start();
 
-            SecretKeySpec secretKeySpec = geradorChaves.generateKeys(audioBytes);
+            SecretKeySpec secretKeySpec = geradorChaves.gerarChaves(audioBytes);
             atualizarPrecoJogo.setSecretKeySpec(secretKeySpec);
             threads.add(atualizarPrecoJogo);
 
