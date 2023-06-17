@@ -6,9 +6,21 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 
 public class ExtratorAudio {
+
     private static final int MAX_BYTES_NUMBERS = 20;
 
-    private ArrayList<byte[]> audioBytesList = new ArrayList<>();
+    private final ArrayList<byte[]> audioBytesList = new ArrayList<>();
+
+    /*
+    * Método que terá como função extrair bytes do arquivo de audio encontrado através do
+    * parâmetro que irá receber o caminho absoluto do arquivo. Assim que o método encontra
+    * o arquivo de áudio ele irá percorrer cada byte individualmente utilizando um loop
+    * 'for-each'. Para cada byte, ele verifica se o número de bytes capturados já atingiu
+    * ou excedeu um limite máximo definido 'MAX_BYTES_NUMBERS'. Dentro do loop, o byte atual
+    * é armazenado em um novo array de bytes 'numberBytes', contendo apenas um único byte.
+    * Esse array é adicionado a uma lista chamada 'audioBytesList' que será lista dos bytes
+    * que serão usados posteriormente na aplicação.
+    */
 
     public void extractBytes(String inputFile) {
         try {
@@ -29,6 +41,7 @@ public class ExtratorAudio {
         }
     }
 
+    // Retorna o ArrayList de bytes lidos e gerados pelo método extractBytes
     public ArrayList<byte[]> getAudioBytes() {
         return audioBytesList;
     }

@@ -177,15 +177,12 @@ public class Main {
     }
 
     /*
-    * Este método percorre a lista de jogos e verifica, para cada jogo, se houve uma diminuição
-    * significativa de preço, executando o método da classe JogoDigital e também verificando
-    * se o preço anterior do jogo é diferente de zero. Se essas condições forem atendidas, a mensagem
-    * com as informações do respectivo jogo são expostas na tela. Se nenhum jogo apresentar uma dimiuição
-    * significativa de preço, outra mensagem indicando que não houve redução significativa nos preços
-    * é impressa.
-    * A complexidade do método é linear O(n), onde 'n' é o número de jogos na lista. Isso ocorre pois
-    * o método percorre todos os jogos da lista de uma vez, realizando uma verificação simples para cada
-    * jogo.
+    * Este método é responsável para iniciar a monitoração de uma thread e permitir que o
+    * usuário pare a monitoração quando desejar.
+    *
+    * Complexidade constante pois o número de iterações do loop do-while é fixo e independente
+    * do tamanho dos dados de entrada. O loop é executado apenas uma vez até que a condição seja satisfeita
+    * (quando o usuário digitar 'S').
     *  */
     public static void iniciarMonitorarThread() throws Exception {
         char saida;
@@ -205,6 +202,13 @@ public class Main {
         monitorarJogo.pararMonitorar();
         menu();
     }
+
+    /*
+    * O método lista as informações criptografadas e descriptografadas, exibindo suas informações
+    * A complexidade é O(n) onde n é o número de objetos 'AtualizarPrecoJogo' da lista de threads.
+    * Tendo em vista que cada thread 'AtualizarPrecoJogo' é responsável por 1 objeto 'JogoDigital',
+    * então a quantidade de 'AtualizarPrecoJogo' é 20.
+    */
 
     public static void listarCriptografias() throws Exception {
 
