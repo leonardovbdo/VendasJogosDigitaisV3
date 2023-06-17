@@ -29,6 +29,7 @@ public class Main {
             threads.add(atualizarPrecoJogo);
             atualizarPrecoJogo.start();
         }
+        monitorarJogo.start();
 
         System.out.println("-----------------------------------------------------");
         System.out.println("----------------BEM-VINDO-À-NOSSA-LOJA---------------");
@@ -170,19 +171,23 @@ public class Main {
     * o método percorre todos os jogos da lista de uma vez, realizando uma verificação simples para cada
     * jogo.
     *  */
-    public static void monitorarPrecosPrincipal() {
-        boolean encontrouDiferenca = false;
-        for (JogoDigital jogo : jogos) {
-            if (jogo.recebeuDiminuicaoSignificativa() && jogo.getPrecoAntigo() != 0) {
-                encontrouDiferenca = true;
-                System.out.println("\nO jogo " + jogo.getNome() + " sofreu uma alteração significativa em seu preço!" +
-                        "\nPreço anterior: R$" + df.format(jogo.getPrecoAntigo()) +
-                        "\nPreço atual: R$" + df.format(jogo.getPrecoAtual()));
+    public static void iniciarMonitorarThread() throws InterruptedException{
+        char saida;
+        monitorarJogo.monitorar();
+        System.out.println("\nDigite S para parar de monitorar");
+        saida = entrada.nextLine().charAt(0);
+        char saidaUpperCase = Character.toUpperCase(saida);
+        boolean monitorando = true;
+
+        do {
+            if (saidaUpperCase == 'S') {
+                monitorando = false;
+            } else {
+                saidaUpperCase = Character.toUpperCase(entrada.nextLine().charAt(0));
             }
-        }
-        if (!encontrouDiferenca) {
-            System.out.println("\nNão houve alguma redução significativa nos preços dos jogos...");
-        }
+        } while (monitorando);
+        monitorarJogo.pararMonitorar();
+        menu();
     }
 
     /*
@@ -220,8 +225,8 @@ public class Main {
                     encontrarMaiorDiferencaAvaliacao(jogos);
                     break;
                 case 'P':
-                    //monitorarPrecosPrincipal();
-                    monitorarJogo.run();
+                    iniciarMonitorarThread();
+                    ligado = false;
                     break;
                 case 'S':
                     System.out.println("\nAguarde, o sistema está sendo desligado...");
