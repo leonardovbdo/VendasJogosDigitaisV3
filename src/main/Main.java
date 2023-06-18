@@ -246,6 +246,7 @@ public class Main {
             System.out.println("[C] - IMPRIMIR A LISTA DE JOGOS DE ORDENADA DE FORMA CRESCENTE");
             System.out.println("[D] - CALCULAR A MAIOR DIFERÊNÇA ENTRE PORCENTAGENS DE AVALIAÇÕES POSITIVAS");
             System.out.println("[T] - EXIBIR MONITORAMENTO PELA THREAD");
+            System.out.println("[L] - EXIBIR VALORES CRIPTOGRAFADOS E DESCRIPTOGRAFADOS");
             System.out.println("[S] - SAIR");
             System.out.print("Sua escolha: ");
             opcao = entrada.nextLine().charAt(0);

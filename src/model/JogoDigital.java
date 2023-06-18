@@ -138,19 +138,6 @@ public class JogoDigital {
         return 100 * ((double) this.getAvaliacoesPositivas() / this.getUnidadesVendidas());
     }
 
-    /*
-    * Método de que define uma variável diminuicaoPercentual com base no calculo da diferença
-    * entre precoAntigo e precoAtual do objeto dividido pelo valor do precoAntigo e depois multiplicado
-    * por 100 para entregar um valor que representa a porcentagem da diferença entre o precoAtual e o
-    * precoAntigo. Depois disso é verificado se a variável diminuicaoPercentual é maior que 50
-    * Se sim o método retornará true.
-    * Complexidade O(1).
-    * */
-    public boolean recebeuDiminuicaoSignificativa() {
-        double diminuicaoPercentual = ((this.precoAntigo - this.precoAtual) / this.precoAntigo) * 100;
-        return diminuicaoPercentual > 50.0;
-    }
-
     @Override
     public String toString() {
         return "\nInformações do jogo "
