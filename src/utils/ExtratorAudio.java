@@ -4,6 +4,9 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 public class ExtratorAudio {
 
@@ -26,14 +29,20 @@ public class ExtratorAudio {
         try {
             byte[] fileBytes = Files.readAllBytes(Path.of(inputFile));
             int bytesNumbersCaptured = 0;
+            Set<Byte> uniqueBytes = new HashSet<>();
 
             for (byte fileByte : fileBytes) {
                 if (bytesNumbersCaptured >= MAX_BYTES_NUMBERS) {
                     break;
                 }
 
+                if (uniqueBytes.contains(fileByte)) {
+                    continue;
+                }
+
                 byte[] numberBytes = {fileByte};
                 audioBytesList.add(numberBytes);
+                uniqueBytes.add(fileByte);
                 bytesNumbersCaptured++;
             }
         } catch (IOException e) {
@@ -41,8 +50,9 @@ public class ExtratorAudio {
         }
     }
 
-    // Retorna o ArrayList de bytes lidos e gerados pelo método extractBytes
-    public ArrayList<byte[]> getAudioBytes() {
-        return audioBytesList;
+
+    public byte[] getAudioBytes(int i) {
+        System.out.println(Arrays.toString(audioBytesList.get(i)));
+        return audioBytesList.get(i);
     }
 }

@@ -16,12 +16,12 @@ public class GeradorChaves {
     * responsavel por gerar as chaves do array com o uso do algoritmo de 'AES'.
     */
 
-    public SecretKeySpec gerarChaves(ArrayList<byte[]> bytes) {
-        if (bytes != null && bytes.size() > 0) {
+    public SecretKeySpec gerarChaves(byte[] bytes) {
+        if (bytes != null && bytes.length > 0) {
             byte[] chavesEncriptadas = new byte[16];
-            for (int i = 0; i < Math.min(bytes.size(), 16); i++) {
-                byte[] key = bytes.get(i);
-                chavesEncriptadas[i] = key[0];
+            for (int i = 0; i < Math.min(bytes.length, 16); i++) {
+                byte key = bytes[i];
+                chavesEncriptadas[i] = key;
             }
             return new SecretKeySpec(chavesEncriptadas, "AES");
         }

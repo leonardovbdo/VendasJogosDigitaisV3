@@ -39,7 +39,7 @@ public class Main {
             extractor.extractBytes("C:\\Users\\odran\\OneDrive\\Área de Trabalho\\prova\\VendasJogosDigitais\\src\\assets\\bebe_chorando.wav");
 
             // ArrayList de bytes que receberá os bytes extraidos
-            ArrayList<byte[]> audioBytes = extractor.getAudioBytes();
+            byte[] audioBytes = extractor.getAudioBytes(i);
 
             atualizarPrecoJogo.start();
 
