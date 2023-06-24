@@ -187,7 +187,7 @@ public class Main {
     * Este método é responsável para iniciar a monitoração de uma thread e permitir que o
     * usuário pare a monitoração quando desejar.
     *
-    * Complexidade constante pois o número de iterações do loop do-while é fixo e independente
+    * Complexidade constante O(1) pois o número de iterações do loop do-while é fixo e independente
     * do tamanho dos dados de entrada. O loop é executado apenas uma vez até que a condição seja satisfeita
     * (quando o usuário digitar 'S').
     *  */
