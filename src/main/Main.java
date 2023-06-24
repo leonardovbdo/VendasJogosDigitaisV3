@@ -26,6 +26,7 @@ public class Main {
 
     public static ExtratorAudio extractor = new ExtratorAudio();
     public static GeradorChaves geradorChaves = new GeradorChaves();
+    public static Encriptador encriptador = new Encriptador();
 
     public static void main(String[] args) throws Exception {
 
@@ -36,18 +37,18 @@ public class Main {
 
 
             // método que irá extrair os bytes do arquivo de aúdio através do seu caminho
-            extractor.extractBytes("C:\\Users\\odran\\OneDrive\\Área de Trabalho\\prova\\VendasJogosDigitais\\src\\assets\\bebe_chorando.wav");
+            extractor.extractBytes("C:\\Users\\odran\\OneDrive\\Área de Trabalho\\avaliação 3\\VendasJogosDigitaisV3\\src\\assets\\bebe_chorando.wav");
 
-            // ArrayList de bytes que receberá os bytes extraidos
+            // bytes que receberão os bytes extraidos com base no parâmetro
             byte[] audioBytes = extractor.getAudioBytes(i);
 
-            atualizarPrecoJogo.start();
-
-            // Chaves são geradas a partir do ArrayList de bytes extraídos do áudio
+            // Chaves são geradas a partir dos bytes extraídos do áudio
             SecretKeySpec secretKeySpec = geradorChaves.gerarChaves(audioBytes);
 
-            // thread recebe a chave criada que será usada para criptografar e/ou desemcriptografar
+            // thread recebe a chave criada que será usada para criptografar e/ou descriptografar
             atualizarPrecoJogo.setSecretKeySpec(secretKeySpec);
+
+            atualizarPrecoJogo.start();
             threads.add(atualizarPrecoJogo);
 
         }
@@ -218,14 +219,21 @@ public class Main {
 
     public static void listarCriptografias() throws Exception {
 
+        /*
+         * Imprime a variável retornada de dados encriptados de jogo de cada thread.
+         */
         for (AtualizarPrecoJogo atualizarPrecoJogo : threads) {
             System.out.println(atualizarPrecoJogo.toStringEncriptado());
         }
 
         System.out.println();
 
+        /*
+         * Imprime a descriptografia da variável de dados encriptados de jogos, recebendo os dados
+         * encriptados e a chave da própria thread.
+         */
         for (AtualizarPrecoJogo atualizarPrecoJogos : threads) {
-            System.out.println(Encriptador.decrypt(atualizarPrecoJogos.toStringEncriptado(),atualizarPrecoJogos.getSecretKeySpec()));
+            System.out.println(encriptador.decrypt(atualizarPrecoJogos.toStringEncriptado(), atualizarPrecoJogos.getSecretKeySpec()));
         }
 
     }
@@ -270,6 +278,7 @@ public class Main {
                     ligado = false;
                     break;
                 case 'L' :
+                    System.out.println("");
                     listarCriptografias();
                     break;
                 case 'S':

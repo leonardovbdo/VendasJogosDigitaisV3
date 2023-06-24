@@ -15,7 +15,6 @@ public class AtualizarPrecoJogo extends Thread {
 
     private SecretKeySpec secretKeySpec;
     private String dadosEncrpitados;
-    private Encriptador encriptador = new Encriptador();
 
     private final JogoDigital jogo;
     private boolean ligado;
@@ -40,9 +39,15 @@ public class AtualizarPrecoJogo extends Thread {
                 jogo.setPromocaoAleatoria();
                 jogo.setUnidadesVendidasAleatoria();
                 jogo.setAvaliacoesPositivasAleatoria();
+
+                // variável String 'dados' com o toString contendo as informações do objeto jogo da thread
                 String dados = jogo.toString();
 
-                this.dadosEncrpitados = encriptador.encriptar(dados, getSecretKeySpec());
+                /*
+                * Variável 'dadosEncriptados' da thread irá usar o mecanismo de encriptação para encriptar
+                * os dados do objeto jogo com base na chave definida na classe main durante a criação da thread
+                */
+                this.dadosEncrpitados = Encriptador.encriptar(dados, getSecretKeySpec());
 
                 Thread.sleep(10000); // Espera 10 segundos
             } catch (Exception e) {
@@ -59,6 +64,7 @@ public class AtualizarPrecoJogo extends Thread {
         this.secretKeySpec = secretKeySpec;
     }
 
+    // retorna a variável dos dados que foram encriptados durante o trabalho da thread
     public String toStringEncriptado() {
         return this.dadosEncrpitados;
     }

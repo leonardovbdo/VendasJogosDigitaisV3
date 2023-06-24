@@ -44,7 +44,7 @@ public class Encriptador {
     * que em seguida é retornada pelo método.
     */
 
-    public static String decrypt(String dadosCriptografados, SecretKeySpec chave) throws Exception{
+    public String decrypt(String dadosCriptografados, SecretKeySpec chave) throws Exception{
 
         String dados = null;
 

@@ -12,18 +12,24 @@ public class ExtratorAudio {
 
     private static final int MAX_BYTES_NUMBERS = 20;
 
+    /*
+     * Declaração de uma variável de instância 'audioBytesList' do tipo ArrayList, que armazena arrays de bytes.
+     * A lista 'audioBytesList' é usada para armazenar os arrays de bytes extraídos do arquivo de áudio.
+     * Cada array de bytes contém um conjunto de bytes relacionados ao áudio.
+     */
     private final ArrayList<byte[]> audioBytesList = new ArrayList<>();
 
     /*
-    * Método que terá como função extrair bytes do arquivo de audio encontrado através do
-    * parâmetro que irá receber o caminho absoluto do arquivo. Assim que o método encontra
-    * o arquivo de áudio ele irá percorrer cada byte individualmente utilizando um loop
-    * 'for-each'. Para cada byte, ele verifica se o número de bytes capturados já atingiu
-    * ou excedeu um limite máximo definido 'MAX_BYTES_NUMBERS'. Dentro do loop, o byte atual
-    * é armazenado em um novo array de bytes 'numberBytes', contendo apenas um único byte.
-    * Esse array é adicionado a uma lista chamada 'audioBytesList' que será lista dos bytes
-    * que serão usados posteriormente na aplicação.
-    */
+     * Método que tem a função de extrair bytes de um arquivo de áudio com base no caminho absoluto fornecido.
+     * Assim que o método localiza o arquivo de áudio, ele percorre cada byte individualmente usando um loop 'for-each'.
+     * Para cada byte encontrado, é verificado se o número de bytes capturados já atingiu ou excedeu o limite máximo definido como 'MAX_BYTES_NUMBERS'.
+     * Dentro do loop, o byte atual é armazenado em um novo array de bytes chamado 'numberBytes', que contém apenas um único byte.
+     * Esse array é adicionado à lista 'audioBytesList', que será usada posteriormente na aplicação.
+     * Além disso, o método utiliza um conjunto chamado 'uniqueBytes' para garantir que apenas bytes únicos sejam adicionados à lista.
+     *
+     * Caso o número máximo de bytes seja atingido, o loop é interrompido usando a instrução 'break'.
+     * Além disso, se o byte atual já estiver presente no conjunto 'uniqueBytes', o loop avança para a próxima iteração usando a instrução 'continue'.
+     */
 
     public void extractBytes(String inputFile) {
         try {
@@ -50,9 +56,12 @@ public class ExtratorAudio {
         }
     }
 
-
+    /*
+     * Método que retorna um array de bytes correspondente ao índice especificado da lista de bytes de áudio.
+     * O método recebe um parâmetro 'i', que representa o índice desejado.
+     * Ele recupera o array de bytes na posição 'i' da lista 'audioBytesList' e o retorna.
+     */
     public byte[] getAudioBytes(int i) {
-        System.out.println(Arrays.toString(audioBytesList.get(i)));
         return audioBytesList.get(i);
     }
 }
