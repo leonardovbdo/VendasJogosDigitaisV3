@@ -49,7 +49,7 @@ public enum Nomes {
     }
 
     /*
-    * Método que tem complexidade linear, pois percorre todos os elementos do Enum 'Nomes
+    * Método que tem complexidade linear O(n), pois percorre todos os elementos do Enum 'Nomes
     * em um loop que verifica se o ID dado corresponde ao ID de cada nome de jogo no Enum.
     * A complexidade aumenta proporcionalmente ao número de elementos no enum. O método retorna
     * a string do atributo name do elemento no enum se o ID fornecido bater ao respectivo elemento.
