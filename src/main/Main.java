@@ -37,7 +37,7 @@ public class Main {
 
 
             // método que irá extrair os bytes do arquivo de aúdio através do seu caminho
-            extractor.extractBytes("C:\\Users\\odran\\OneDrive\\Área de Trabalho\\avaliação 3\\VendasJogosDigitaisV3\\src\\assets\\bebe_chorando.wav");
+            extractor.extractBytes("C:\\Users\\odran\\OneDrive\\Área de Trabalho\\VendasJogosDigitaisV3\\src\\assets\\bebe_chorando.wav");
 
             // bytes que receberão os bytes extraidos com base no parâmetro
             byte[] audioBytes = extractor.getAudioBytes(i);
