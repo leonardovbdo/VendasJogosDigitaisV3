@@ -28,16 +28,29 @@ public class Main {
     public static GeradorChaves geradorChaves = new GeradorChaves();
     public static Encriptador encriptador = new Encriptador();
 
+    /*
+     * Método principal 'main' da aplicação que irá iniciar um loop 'for'
+     * que irá realizar 20 iterações no total e dentro do loop há a criação
+     * de um objeto da classe 'JogoDigital' passando o nome obtido através do
+     * método 'Nomes.getNomeById(i)' como parâmetro, capturando o String dos
+     * 20 elementos de nomes de jogo presentes na classe Enum 'Nomes'.
+     * A complexidade desse método é constante O(n) pois depende do tamanho de
+     * elementos presentes na classe Enum, portanto, a medida que o número de
+     * elementos na enumeração aumenta, o número de iterações do loop também aumenta
+     * proporcionalmente. Porém se formos considerar que o método executado dentro do
+     * loop 'getNomeById' possui complexidade também O(n), no final das contas. O método
+     * terá complexidade O(n^2) onde 'n' é o número de elementos presentes no Enum.
+     */
     public static void main(String[] args) throws Exception {
 
-        for (int i = 0; i < 20; i++) {
+        for (int i = 0; i < Nomes.values().length; i++) {
             JogoDigital jogo = new JogoDigital(Nomes.getNomeById(i));
             jogos.add(jogo);
             AtualizarPrecoJogo atualizarPrecoJogo = new AtualizarPrecoJogo(jogo);
 
 
             // método que irá extrair os bytes do arquivo de aúdio através do seu caminho
-            extractor.extractBytes("C:\\Users\\odran\\OneDrive\\Área de Trabalho\\VendasJogosDigitaisV3\\src\\assets\\bebe_chorando.wav");
+            extractor.extractBytes("C:\\Users\\odran\\OneDrive\\Área de Trabalho\\Avaliação Final\\VendasJogosDigitaisV3\\src\\assets\\bebe_chorando.wav");
 
             // bytes que receberão os bytes extraidos com base no parâmetro
             byte[] audioBytes = extractor.getAudioBytes(i);
