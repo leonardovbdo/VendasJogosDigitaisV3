@@ -120,6 +120,12 @@ public class Main {
      * as variáveis novamente, caso a verificação retorne como verdadeira. A complexidade do algoritmo presente neste método
      * estático é de O(n^3), já que a presença dos três loops aninhados para realizar essas buscas e comparações implica neste fato,
      * afinal cada loop utiliza a quantidade de jogos presente na lista, sendo esse o valor de n.
+     *
+     * É possível que esse algoritmo gere alguma situação de necessidade de processamento via brute force? Sim, porque
+     * ele examina todas as combinações possíveis de três jogos diferentes para calcular a maior diferença entre as porcentagens
+     * de avaliações positivas. Essa abordagem de força bruta é necessária para garantir que todas as combinações sejam
+     * consideradas e que a maior diferença seja encontrada corretamente. No entando, o problema com essa abordagem é
+     * que ela se torna ineficiente a medida que o número de jogos aumenta.
      */
     public static void encontrarMaiorDiferencaAvaliacao(ArrayList<JogoDigital> jogos) {
         int n = jogos.size();
