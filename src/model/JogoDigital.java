@@ -134,6 +134,11 @@ public class JogoDigital {
         this.avaliacoesPositivas = (int) (Math.random() * this.unidadesVendidas);
     }
 
+    /*
+     * Método que tem como finalidade calcular a porcentagem de avaliações positivas em
+     * relação ao total de unidades vendidas. Compleixdade desse método é constante O(1),
+     * pois envolve apenas operações aritméticas simples echamadas de métodos getters.
+     */
     public double getPorcentagemAvaliacoesPositivas() {
         return 100 * ((double) this.getAvaliacoesPositivas() / this.getUnidadesVendidas());
     }
